@@ -1,0 +1,25 @@
+<html>
+<div>
+    Microblog:
+    <a href="/index">Home</a>
+    <a href="/login">Login</a>
+    <a href="/message">Message</a>
+</div>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Microblog</title>
+        {% else %}
+        <title>Welcome to Microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <h1>Hi, {{ user.username }}!</h1>
+        {% for post in posts %}
+        <div><p>{{ post.author.username }} зашел с паролем: <b>{{ post.body }}</b></p></div>
+        {% endfor %}
+        <h1>Now posts</h1>
+        {% for post in userPosts %}
+        <div><p>{{ post.author.username }} создал запись: <b>{{ post.body }}</b></p></div>
+        {% endfor %}
+    </body>
+</html>
