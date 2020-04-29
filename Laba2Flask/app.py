@@ -183,19 +183,18 @@ def webcalculate():
         lastQuery.append(form.query.data)
         search_results = google.calculate(form.query.data)
         userCalculate.clear()
-        for result in search_results:
-            somePosts = [
-                {
-                    'value': result.value,
-                    'from_value': result.from_value,
-                    'unit': result.unit,
-                    'from_unit': result.from_unit,
-                    'expr': result.expr,
-                    'result': result.result,
-                    'fullstring': result.fullstring
-                }
-            ]
-            userCalculate.extend(somePosts)
+        somePosts = [
+            {
+                'value': search_results.value,
+                'from_value': search_results.from_value,
+                'unit': search_results.unit,
+                'from_unit': search_results.from_unit,
+                'expr': search_results.expr,
+                'result': search_results.result,
+                'fullstring': search_results.fullstring
+            }
+        ]
+        userCalculate.extend(somePosts)
         return redirect("/webcalculate")
     return render_template('webcalculate.html',  title='Webcalculate', form=form, userCalculate=userCalculate, current_user=current_user, lastQuery=lastQuery)
 
@@ -217,6 +216,7 @@ def webimagesearch():
         options.color = form.color.data
         search_results = google.search_images(form.query.data, options)
         userImageSearch.clear()
+        print(search_results)
         for result in search_results:
             somePosts = [
                 {
