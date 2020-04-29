@@ -1,0 +1,40 @@
+<html>
+<div>
+    Microblog:
+    <a href="/index">Home</a>
+    <a href="/login">Login</a>
+    <a href="/message">Message</a>
+    <a href="/logout">Logout</a>
+    <a href="/websearch">WebSearch</a>
+    <a href="/webcalculate">WebCalculate</a>
+    <a href="/webimagesearch">WebImageSearch</a>
+    <a href="/webconvert">WebCurrencyConvert</a>
+</div>
+<h1>Введи запрос на рассчёт в гугл</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.query.label }}<br>
+            {{ form.query(size=320) }}<br>
+            {% for error in form.query.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+<body>
+        <h1>Результаты твоих запросов</h1>
+        <div><p>{{ current_user.login }} создал запрос: <b>{{ lastQuery[0] }}</b></p></div>
+        {% for result in userCalculate %}
+            <p>
+                value: {{ result.value }}<br>
+                from_value: {{ result.from_value }}<br>
+                unit: {{ result.unit }}<br>
+                from_unit: {{ result.from_unit }}<br>
+                expr: {{ result.expr }}<br>
+                result: {{ result.result }}<br>
+                fullstring: {{ result.fullstring }}<br>
+            </p>
+        {% endfor %}
+    </body>
+</html>

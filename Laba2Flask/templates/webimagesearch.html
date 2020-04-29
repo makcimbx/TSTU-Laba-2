@@ -1,0 +1,95 @@
+<html>
+<div>
+    Microblog:
+    <a href="/index">Home</a>
+    <a href="/login">Login</a>
+    <a href="/message">Message</a>
+    <a href="/logout">Logout</a>
+    <a href="/websearch">WebSearch</a>
+    <a href="/webcalculate">WebCalculate</a>
+    <a href="/webimagesearch">WebImageSearch</a>
+    <a href="/webconvert">WebCurrencyConvert</a>
+</div>
+<h1>Введи запрос на поиск картинки (У того кто держит сайт должен быть Firefox)</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.query.label }}<br>
+            {{ form.query(size=320) }}<br>
+            {% for error in form.query.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.imageType.label }}<br>
+            {{ form.imageType(size=50) }}<br>
+            {% for error in form.imageType.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.sizeCategory.label }}<br>
+            {{ form.sizeCategory(size=50) }}<br>
+            {% for error in form.sizeCategory.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.largerThan.label }}<br>
+            {{ form.largerThan(size=50) }}<br>
+            {% for error in form.largerThan.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.exactWidth.label }}<br>
+            {{ form.exactWidth(size=50) }}<br>
+            {% for error in form.exactWidth.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.exactHeight.label }}<br>
+            {{ form.exactHeight(size=50) }}<br>
+            {% for error in form.exactHeight.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.colorType.label }}<br>
+            {{ form.colorType(size=50) }}<br>
+            {% for error in form.colorType.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.color.label }}<br>
+            {{ form.color(size=50) }}<br>
+            {% for error in form.color.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+<body>
+        <h1>Результаты твоих запросов</h1>
+        <div><p>{{ current_user.login }} создал запрос: <b>{{ lastQuery[0] }}</b></p></div>
+        {% for result in userImageSearch %}
+            <p>
+                domain: {{ result.domain }}<br>
+                filesize: {{ result.filesize }}<br>
+                format: {{ result.format }}<br>
+                height: {{ result.height }}<br>
+                index: {{ result.index }}<br>
+                link: {{ result.link }}<br>
+                name: {{ result.name }}<br>
+                page: {{ result.page }}<br>
+                site: {{ result.site }}<br>
+                thumb: {{ result.thumb }}<br>
+                thumb_height: {{ result.thumb_height }}<br>
+                thumb_width: {{ result.thumb_width }}<br>
+                width: {{ result.width }}<br>
+            </p>
+        {% endfor %}
+    </body>
+</html>

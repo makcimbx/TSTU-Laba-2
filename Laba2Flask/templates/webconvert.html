@@ -1,0 +1,46 @@
+<html>
+<div>
+    Microblog:
+    <a href="/index">Home</a>
+    <a href="/login">Login</a>
+    <a href="/message">Message</a>
+    <a href="/logout">Logout</a>
+    <a href="/websearch">WebSearch</a>
+    <a href="/webcalculate">WebCalculate</a>
+    <a href="/webimagesearch">WebImageSearch</a>
+    <a href="/webconvert">WebCurrencyConvert</a>
+</div>
+<h1>Введи запрос в гугл</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.value.label }}<br>
+            {{ form.value(size=320) }}<br>
+            {% for error in form.value.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.fromQuery.label }}<br>
+            {{ form.fromQuery(size=320) }}<br>
+            {% for error in form.fromQuery.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.afterQuery.label }}<br>
+            {{ form.afterQuery(size=320) }}<br>
+            {% for error in form.afterQuery.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+<body>
+        <h1>Результаты твоих запросов</h1>
+        <div><p>{{ current_user.login }} создал запрос: <b>{{ lastQuery[0] }}</b></p></div>
+        {% for item in userCurrencyConvert %}
+            <p>{{ item.value }} {{ item.beforeQuery }} = {{ item.result }} {{ item.afterQuery }}</p>
+        {% endfor %}
+    </body>
+</html>
